@@ -408,7 +408,7 @@ INNER JOIN (
 SELECT account_type, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Accounts) AS percentage
 FROM Accounts GROUP BY account_type;
 ```
-<img src="./outputs/o35.png" width="300" />
+<img src="./outputs/o35.png" width="200" />
 
 - 9. Retrieve all transactions for a customer with a given customer_id. 
 ```sql
