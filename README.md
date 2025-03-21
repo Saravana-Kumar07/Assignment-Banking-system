@@ -185,3 +185,16 @@ DELETE FROM Accounts WHERE balance = 0 AND account_type = 'savings';
 SELECT * FROM Customers WHERE perm_address LIKE '%Iyyapanthangal%';
 ```
 <img src="./outputs/o11.png" width="1000" />
+
+- 7. Write a SQL query to Get the account balance for a specific account.
+```sql
+SELECT balance FROM Accounts WHERE account_id = 4;
+```
+<img src="./outputs/o12.png" width="700" />
+
+- 8.Write a SQL query to List all current accounts with a balance greater than $1,000.
+```sql
+SELECT * FROM Accounts 
+WHERE account_type = 'current' AND balance > 1000;
+```
+<img src="./outputs/o13.png" width="400" />
