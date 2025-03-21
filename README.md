@@ -1,9 +1,8 @@
 # <p align='center'> Assignment Banking system </p>
-## Name: Saravana Kumar S
-```
-Superset ID: 5371342
+### Name: Saravana Kumar S
+Superset ID: 5371342<br>
 College: Saveetha Engineering college
-```
+
 ### Task 1: Database creation
 1. Create the database named "HMBank"
 ```sql
