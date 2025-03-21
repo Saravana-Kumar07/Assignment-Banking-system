@@ -226,4 +226,116 @@ WHERE account_type = 'savings';
   ```
   <img src="./outputs/O17.png" width="800" />
 
-## Tasks 3: Aggregate functions, Having, Order By, GroupBy and Joins: 
+## Tasks 3: Aggregate functions, Having, Order By, GroupBy and Joins:
+- 1. Write a SQL query to Find the average account balance for all customers.
+```sql
+SELECT AVG(balance) AS Average FROM Accounts;
+```
+ <img src="./outputs/O18.png" width="100" />
+
+ - 2. Write a SQL query to Retrieve the top 10 highest account balances.
+ ```sql
+SELECT * FROM Accounts ORDER BY balance DESC
+LIMIT 10;
+```
+<img src="./outputs/O19.png" width="500" />
+
+- 3. Write a SQL query to Calculate Total Deposits for All Customers in specific date.
+```sql
+SELECT SUM(amount) AS total_deposits FROM Transactions
+WHERE transaction_type = 'deposit'
+AND transaction_date = '2025-03-07';
+```
+<img src="./outputs/O20.png" width="150" />
+
+- 4. Write a SQL query to Find the Oldest and Newest Customers.
+```sql
+SELECT  MAX(DOB) AS newcustomer, MIN(DOB) AS oldcustomer
+FROM Customers;
+```
+<img src="./outputs/O21.png" width="250" />
+
+- 5. Write a SQL query to Retrieve transaction details along with the account type.
+```sql
+SELECT t.*, a.account_type FROM Transactions t
+INNER JOIN Accounts a ON t.account_id = a.account_id;
+```
+<img src="./outputs/O22.png" width="500" />
+
+- 6. Write a SQL query to Get a list of customers along with their account details.
+```sql
+SELECT CONCAT(c.first_name, ' ', c.last_name) AS full_name , a.* FROM Customers c
+INNER JOIN Accounts a ON c.customer_id = a.customer_id;
+```
+<img src="./outputs/O23.png" width="500" />
+
+- 7. Write a SQL query to Retrieve transaction details along with customer information for a specific account.
+```sql
+SELECT t.*, c.* FROM Transactions t
+INNER JOIN Accounts a ON t.account_id = a.account_id
+INNER JOIN Customers c ON a.customer_id = c.customer_id
+WHERE a.account_id = 6;
+```
+<img src="./outputs/O24.png" width="1000" />
+
+- 8. Write a SQL query to Identify customers who have more than one account.
+```sql
+ SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS Name FROM Customers c
+WHERE c.customer_id IN ( SELECT customer_id FROM Accounts
+GROUP BY customer_id HAVING COUNT(*) > 1);
+```
+
+- 9. Write a SQL query to Calculate the difference in transaction amounts between deposits and withdrawals. 
+```sql
+SELECT account_id, SUM(CASE WHEN transaction_type = 'deposit' THEN amount ELSE -amount END) AS transaction_difference
+FROM Transactions GROUP BY account_id;
+```
+<img src="./outputs/O25.png" width="350" />
+
+- 10. Write a SQL query to Calculate the average daily balance for each account over a specified 
+period.
+```sql
+SELECT account_id, AVG(balance) AS daily_balance
+FROM (
+      SELECT 
+          a.account_id,t.transaction_date,
+          SUM(CASE WHEN t.transaction_type = 'withdrawal' THEN -t.amount ELSE t.amount END) AS balance
+      FROM Accounts a
+      LEFT JOIN Transactions t ON a.account_id = t.account_id
+      WHERE t.transaction_date BETWEEN '2025-03-01' AND '2025-03-10'
+      GROUP BY a.account_id, t.transaction_date
+    ) AS daily_balances
+GROUP BY account_id;
+```
+<img src="./outputs/O26.png" width="250" />
+
+- 11. Calculate the total balance for each account type.
+```sql
+SELECT account_type, SUM(balance) AS total_balance
+FROM Accounts GROUP BY account_type;
+```
+<img src="./outputs/O27.png" width="300" />
+
+- 12. Identify accounts with the highest number of transactions order by descending order. 
+```sql
+SELECT account_id, COUNT(*) AS transaction_count
+FROM Transactions GROUP BY account_id ORDER BY transaction_count DESC;
+```
+<img src="./outputs/O28.png" width="250" />
+
+- 13. List customers with high aggregate account balances, along with their account types.
+```sql
+SELECT * FROM Accounts a INNER JOIN (SELECT c.customer_id,
+SUM(a.balance) AS aggregate_balance FROM Customers c INNER JOIN Accounts a
+ON c.customer_id = a.customer_id GROUP BY c.customer_id) s ON a.customer_id = s.customer_id;
+```
+<img src="./outputs/O29.png" width="700" />
+
+- 14. Identify and list duplicate transactions based on transaction amount, date, and account. 
+```sql
+SELECT t1.*FROM Transactions t1 JOIN Transactions t2 
+ON t1.amount = t2.amount AND t1.transaction_date = t2.transaction_date AND t1.account_id = t2.account_id
+WHERE t1.transaction_id <> t2.transaction_id;
+```
+
+## Tasks 4: Subquery and its type:
