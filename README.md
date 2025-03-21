@@ -224,4 +224,4 @@ WHERE account_type = 'savings';
  ```sql
   SELECT * FROM Customers WHERE perm_address NOT LIKE '%Iyyapanthangal%';
   ```
-  <img src="./outputs/o17.png" width="800" />
+  <img src="./outputs/O17.png" width="800" />
