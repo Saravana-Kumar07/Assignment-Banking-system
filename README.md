@@ -5,7 +5,7 @@
  CREATE DATABASE HMBank;
  USE HMBank;
  ```
- <img src="./outputs/o1.png" width="400" />
+ <img src="./outputs/o1.png" width="300" />
 
  2. Define the schema for the Customers, Accounts, and Transactions tables based on the provided schema.
 - Customers Table:
@@ -31,7 +31,7 @@
     - `transaction_date`:The date when the transaction happened.
 
 3. Create an ERD (Entity Relationship Diagram) for the database.
-    <img src="./outputs/erd.png" width="600" />
+    <img src="./outputs/erd.png" width="700" />
 
 4. Create appropriate Primary Key and Foreign Key constraints for referential integrity.
 - Primary Keys:
@@ -46,8 +46,9 @@
 6. Write SQL scripts to create the mentioned tables with appropriate data types, constraints, 
 and relationships.   
 • Customers  
-• Accounts 
-• Transactions 
+• Accounts
+
+    • Transactions 
 
 ```sql
 CREATE TABLE Customers(
@@ -61,5 +62,54 @@ CREATE TABLE Customers(
     -> PRIMARY KEY (customer_id)
     -> );
 ```
-<img src="./outputs/o2.png" width="400" />
-    
+<img src="./outputs/o2.png" width="500" />
+
+```sql
+ CREATE TABLE Accounts (
+    -> account_id INT,
+    -> customer_id INT,
+    -> account_type VARCHAR(200),
+    -> balance INT DEFAULT 0 CHECK (balance >= 0),
+    -> PRIMARY KEY (account_id),
+    -> FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+    -> );
+```
+<img src="./outputs/o3.png" width="500" />
+
+```sql
+ CREATE TABLE Transactions (
+    -> transaction_id INT,
+    -> account_id INT,
+    -> transaction_type VARCHAR(200),
+    -> amount INT CHECK (amount > 0),
+    -> transaction_date DATE,
+    -> PRIMARY KEY (transaction_id),
+    -> FOREIGN KEY (account_id) REFERENCES Accounts(account_id)
+    -> );
+```
+<img src="./outputs/o4.png" width="500" />
+
+## Task 2: Select, Where, Between, AND, LIKE
+
+1. Insert at least 10 sample records into each of the following tables.   
+• Customers  
+• Accounts
+
+    • Transactions
+
+```sql
+mysql> INSERT INTO Customers (customer_id, first_name, last_name, DOB, email, phone_number, perm_address)
+    -> VALUES
+    -> (1, 'Saravana', 'Kumar', '2000-10-14', 'saravana.work@gmail.com', 9876543210, '123 chennai'),
+    -> (2, 'Subramaniya', 'Pillai', '2003-09-21', 'subramaniya.123@gmail.com', 8765432109, '456 Mogappair'),
+    -> (3, 'Stevelin', 'Nishanthan', '2004-02-18', 'steveliniaric@gmail.com', 7654321098, '789 Perambur'),
+    -> (4, 'Manoj', 'Kumar', '2003-12-14', 'manoj123@gmail.com', 6543210987, '321 Pallavaram'),
+    -> (5, 'Jeeva', 'MS', '2003-11-15', 'jeeva123@gmail.com', 5432109876, '654 Salem'),
+    -> (6, 'Mothesh', 'M', '2004-10-15', 'mothesh123@gmail.com', 4321098765, '987 Iyyapanthangal'),
+    -> (7, 'Rahul', 'GS', '2003-10-25', 'rahul.gs@gmail.com', 3210987654, '123 Iyyapanthangal'),
+    -> (8, 'Gokul', 'Anand', '2005-06-15', 'gokul.d1@gmail.com', 2109876543, '456 Mogappair'),
+    -> (9, 'Mithun', 'Ram', '2005-10-10', 'mithun.123@gmail.com', 1098765432, '789 Poonamalleee'),
+    -> (10, 'Vidya', 'Neela', '2003-05-07', 'vidyaneela@gmail.com', 1987654321, '321 sriperambathur');
+```
+<img src="./outputs/o5.png" width="500" />
+   
