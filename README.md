@@ -192,9 +192,36 @@ SELECT balance FROM Accounts WHERE account_id = 4;
 ```
 <img src="./outputs/o12.png" width="700" />
 
-- 8.Write a SQL query to List all current accounts with a balance greater than $1,000.
+- 8. Write a SQL query to List all current accounts with a balance greater than $1,000.
 ```sql
 SELECT * FROM Accounts 
 WHERE account_type = 'current' AND balance > 1000;
 ```
 <img src="./outputs/o13.png" width="400" />
+
+- 9. Write a SQL query to Retrieve all transactions for a specific account.
+```sql
+ SELECT * FROM Transactions t
+    -> INNER JOIN Accounts a ON t.account_id = a.account_id
+    -> WHERE a.account_id = 2;
+```
+<img src="./outputs/o14.png" width="1200" />
+
+- 10. Write a SQL query to Calculate the interest accrued on savings accounts based on a given interest rate.
+```sql
+SELECT account_id, balance*(0.2) AS interest FROM Accounts
+WHERE account_type = 'savings';
+```
+<img src="./outputs/o15.png" width="200" />
+
+- 11.  Write a SQL query to Identify accounts where the balance is less than a specified overdraft limit.
+```sql
+ SELECT * FROM Accounts WHERE balance < 5000;
+ ```
+ <img src="./outputs/o16.png" width="400" />
+
+ - 12. Write a SQL query to Find customers not living in a specific city.
+ ```sql
+  SELECT * FROM Customers WHERE perm_address NOT LIKE '%Iyyapanthangal%';
+  ```
+  <img src="./outputs/o17.png" width="800" />
