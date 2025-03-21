@@ -349,7 +349,7 @@ SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS customer_name, a
 FROM Customers c INNER JOIN Accounts a ON c.customer_id = a.customer_id
 WHERE a.balance = (SELECT MAX(balance) FROM Accounts);
 ```
-<img src="./outputs/o30.png" width="700" />
+<img src="./outputs/o30.png" width="500" />
 
 - 2. Calculate the average account balance for customers who have more than one account.
 ```sql
@@ -365,7 +365,7 @@ SELECT a.* FROM Accounts a
 INNER JOIN Transactions t ON a.account_id = t.account_id
 WHERE t.amount > (SELECT AVG(amount) FROM Transactions);
 ```
-<img src="./outputs/o31.png" width="700" />
+<img src="./outputs/o31.png" width="500" />
 
 - 4. Identify customers who have no recorded transactions.
 ```sql
