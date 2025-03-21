@@ -174,3 +174,14 @@ SELECT CONCAT(first_name, ' ', last_name) AS full_name
 FROM Customers;
 ```
 <img src="./outputs/o10.png" width="200" />
+
+- 5. Write a SQL query to remove accounts with a balance of zero where the account type is savings.
+```sql
+DELETE FROM Accounts WHERE balance = 0 AND account_type = 'savings';
+```
+
+- 6. Write a SQL query to Find customers living in a specific city.
+```sql
+SELECT * FROM Customers WHERE perm_address LIKE '%Iyyapanthangal%';
+```
+<img src="./outputs/o11.png" width="1000" />
