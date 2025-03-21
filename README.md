@@ -111,5 +111,36 @@ mysql> INSERT INTO Customers (customer_id, first_name, last_name, DOB, email, ph
     -> (9, 'Mithun', 'Ram', '2005-10-10', 'mithun.123@gmail.com', 1098765432, '789 Poonamalleee'),
     -> (10, 'Vidya', 'Neela', '2003-05-07', 'vidyaneela@gmail.com', 1987654321, '321 sriperambathur');
 ```
-<img src="./outputs/o5.png" width="500" />
-   
+<img src="./outputs/o5.png" width="900" />
+
+```sql
+INSERT INTO Accounts (account_id, customer_id, account_type, balance)
+VALUES
+(1, 1, 'Savings', 5000),
+(2, 2, 'Current', 10000),
+(3, 3, 'Savings', 7000),
+(4, 4, 'Savings', 3000),
+(5, 5, 'Current', 15000),
+(6, 6, 'Savings', 2000),
+(7, 7, 'Current', 8000),
+(8, 8, 'Savings', 4000),
+(9, 9, 'Current', 12000),
+(10, 10, 'Savings', 2500);
+```
+<img src="./outputs/o6.png" width="900" />
+
+```sql
+INSERT INTO Transactions (transaction_id, account_id, transaction_type, amount, transaction_date)
+VALUES
+(1, 1, 'Deposit', 2000, '2025-03-01'),
+(2, 1, 'Withdrawl', 1000, '2025-03-02'),
+(3, 2, 'Deposit', 3000, '2025-03-03'),
+(4, 2, 'Withdrawl', 2000, '2025-03-04'),
+(5, 3, 'Deposit', 4000, '2025-03-05'),
+(6, 3, 'Withdrawl', 1500, '2025-03-06'),
+(7, 4, 'Deposit', 2500, '2025-03-07'),
+(8, 5, 'Withdrawl', 5000, '2025-03-08'),
+(9, 6, 'Deposit', 1000, '2025-03-09'),
+(10, 7, 'Withdrawl', 3000, '2025-03-10');
+```
+<img src="./outputs/o7.png" width="900" />
