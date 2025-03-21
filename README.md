@@ -144,3 +144,33 @@ VALUES
 (10, 7, 'Withdrawl', 3000, '2025-03-10');
 ```
 <img src="./outputs/o7.png" width="900" />
+
+2. Write SQL queries for the following tasks:
+- 1. Write a SQL query to retrieve the name, account type and email of all customers.
+```sql
+ SELECT CONCAT(c.first_name, ' ',c.last_name) AS Name, a.account_type, c.email
+    -> FROM Customers c INNER JOIN Accounts a
+    -> ON c.customer_id = a.customer_id;
+```
+<img src="./outputs/o8.png" width="700" />
+
+- 2. Write a SQL query to list all transaction corresponding customer.
+```sql
+ SELECT CONCAT(c.first_name, ' ', c.last_name) AS Name, t.transaction_id, t.transaction_type, t.amount, t.transaction_date
+    -> FROM Customers c INNER JOIN Accounts a ON c.customer_id = a.customer_id
+    -> INNER JOIN Transactions t ON a.account_id = t.account_id;
+```
+<img src="./outputs/o9.png" width="700" />
+
+- 3. Write a SQL query to increase the balance of a specific account by a certain amount.
+```sql
+UPDATE Accounts
+SET balance = balance + 2000
+WHERE account_id = 5;
+```
+- 4. Write a SQL query to Combine first and last names of customers as a full_name.
+```sql
+SELECT CONCAT(first_name, ' ', last_name) AS full_name
+FROM Customers;
+```
+<img src="./outputs/o10.png" width="200" />
