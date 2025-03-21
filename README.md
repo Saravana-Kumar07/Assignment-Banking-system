@@ -47,7 +47,7 @@ College: Saveetha Engineering college
     - Accounts references Customers: `customer_id`
     - Transactions references Accounts: `account_id`
 
-6. Write SQL scripts to create the mentioned tables with appropriate data types, constraints, 
+5. Write SQL scripts to create the mentioned tables with appropriate data types, constraints, 
 and relationships.   
 • Customers  
 • Accounts
@@ -341,4 +341,88 @@ SELECT t1.*FROM Transactions t1 JOIN Transactions t2
 ON t1.amount = t2.amount AND t1.transaction_date = t2.transaction_date AND t1.account_id = t2.account_id
 WHERE t1.transaction_id <> t2.transaction_id;
 ```
+
+## Tasks 4: Subquery and its type:
+- 1. Retrieve the customer(s) with the highest account balance.
+```sql
+SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS customer_name, a.account_id, a.balance
+FROM Customers c INNER JOIN Accounts a ON c.customer_id = a.customer_id
+WHERE a.balance = (SELECT MAX(balance) FROM Accounts);
+```
+<img src="./outputs/o30.png" width="700" />
+
+- 2. Calculate the average account balance for customers who have more than one account.
+```sql
+SELECT AVG(a.balance) AS avg_balance
+FROM Accounts a WHERE a.customer_id IN (
+SELECT customer_id FROM Accounts
+GROUP BY customer_id HAVING COUNT(account_id) > 1);
+```
+
+- 3. Retrieve accounts with transactions whose amounts exceed the average transaction amount.
+```sql
+SELECT a.* FROM Accounts a
+INNER JOIN Transactions t ON a.account_id = t.account_id
+WHERE t.amount > (SELECT AVG(amount) FROM Transactions);
+```
+<img src="./outputs/o31.png" width="700" />
+
+- 4. Identify customers who have no recorded transactions.
+```sql
+SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS customer_name
+FROM Customers c
+LEFT JOIN Accounts a ON c.customer_id = a.customer_id
+LEFT JOIN Transactions t ON a.account_id = t.account_id
+WHERE t.transaction_id IS NULL;
+```
+<img src="./outputs/o32.png" width="250" />
+
+- 5. Calculate the total balance of accounts with no recorded transactions.
+```sql
+SELECT SUM(balance) AS total_balance FROM Accounts a
+LEFT JOIN Transactions t ON a.account_id = t.account_id
+WHERE t.transaction_id IS NULL;
+```
+<img src="./outputs/o33.png" width="150" />
+
+- 6. Retrieve transactions for accounts with the lowest balance.
+```sql
+SELECT t.* FROM Transactions t
+WHERE t.account_id IN (SELECT account_id FROM Accounts 
+WHERE balance = (SELECT MIN(balance) FROM Accounts));
+```
+<img src="./outputs/o34.png" width="500" />
+
+- 7. Identify customers who have accounts of multiple types.
+```sql
+SELECT c.* FROM Customers c
+INNER JOIN (
+    SELECT customer_id
+    FROM Accounts
+    GROUP BY customer_id
+    HAVING COUNT(DISTINCT account_type) > 1
+) AS multi_type ON c.customer_id = multi_type.customer_id;
+```
+- 8. Calculate the percentage of each account type out of the total number of accounts.
+```sql
+SELECT account_type, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Accounts) AS percentage
+FROM Accounts GROUP BY account_type;
+```
+<img src="./outputs/o35.png" width="300" />
+
+- 9. Retrieve all transactions for a customer with a given customer_id. 
+```sql
+SELECT t.* FROM Transactions t
+INNER JOIN Accounts a ON t.account_id = a.account_id
+WHERE a.customer_id = 1;
+```
+<img src="./outputs/o36.png" width="600" />
+
+- 10. Calculate the total balance for each account type, including a subquery within the SELECT clause.
+```sql
+SELECT account_type,(SELECT SUM(balance) FROM Accounts a2 
+WHERE a2.account_type = a1.account_type) AS total_balance
+FROM Accounts a1GROUP BY account_type;
+```
+<img src="./outputs/o37.png" width="300" />
 
