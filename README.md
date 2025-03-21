@@ -225,3 +225,5 @@ WHERE account_type = 'savings';
   SELECT * FROM Customers WHERE perm_address NOT LIKE '%Iyyapanthangal%';
   ```
   <img src="./outputs/O17.png" width="800" />
+
+## Tasks 3: Aggregate functions, Having, Order By, GroupBy and Joins: 
