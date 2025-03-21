@@ -342,4 +342,3 @@ ON t1.amount = t2.amount AND t1.transaction_date = t2.transaction_date AND t1.ac
 WHERE t1.transaction_id <> t2.transaction_id;
 ```
 
-## Tasks 4: Subquery and its type:
