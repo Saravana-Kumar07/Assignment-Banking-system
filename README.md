@@ -29,3 +29,6 @@
     - `transaction_type`: The type of transaction, like "Deposit" or "Withdrawal" (text).
     - `amount`: The amount of money involved in the transaction. It must be a positive number and cannot be null.
     - `transaction_date`:The date when the transaction happened.
+
+    3. Create an ERD (Entity Relationship Diagram) for the database.
+    <img src="./outputs/erd.png" width="600" />
