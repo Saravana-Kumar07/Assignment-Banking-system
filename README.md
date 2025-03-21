@@ -231,14 +231,14 @@ WHERE account_type = 'savings';
 ```sql
 SELECT AVG(balance) AS Average FROM Accounts;
 ```
- <img src="./outputs/O18.png" width="100" />
+ <img src="./outputs/o18.png" width="100" />
 
  - 2. Write a SQL query to Retrieve the top 10 highest account balances.
  ```sql
 SELECT * FROM Accounts ORDER BY balance DESC
 LIMIT 10;
 ```
-<img src="./outputs/O19.png" width="500" />
+<img src="./outputs/o19.png" width="500" />
 
 - 3. Write a SQL query to Calculate Total Deposits for All Customers in specific date.
 ```sql
@@ -246,28 +246,28 @@ SELECT SUM(amount) AS total_deposits FROM Transactions
 WHERE transaction_type = 'deposit'
 AND transaction_date = '2025-03-07';
 ```
-<img src="./outputs/O20.png" width="150" />
+<img src="./outputs/o20.png" width="150" />
 
 - 4. Write a SQL query to Find the Oldest and Newest Customers.
 ```sql
 SELECT  MAX(DOB) AS newcustomer, MIN(DOB) AS oldcustomer
 FROM Customers;
 ```
-<img src="./outputs/O21.png" width="250" />
+<img src="./outputs/o21.png" width="250" />
 
 - 5. Write a SQL query to Retrieve transaction details along with the account type.
 ```sql
 SELECT t.*, a.account_type FROM Transactions t
 INNER JOIN Accounts a ON t.account_id = a.account_id;
 ```
-<img src="./outputs/O22.png" width="500" />
+<img src="./outputs/o22.png" width="500" />
 
 - 6. Write a SQL query to Get a list of customers along with their account details.
 ```sql
 SELECT CONCAT(c.first_name, ' ', c.last_name) AS full_name , a.* FROM Customers c
 INNER JOIN Accounts a ON c.customer_id = a.customer_id;
 ```
-<img src="./outputs/O23.png" width="500" />
+<img src="./outputs/o23.png" width="500" />
 
 - 7. Write a SQL query to Retrieve transaction details along with customer information for a specific account.
 ```sql
@@ -276,7 +276,7 @@ INNER JOIN Accounts a ON t.account_id = a.account_id
 INNER JOIN Customers c ON a.customer_id = c.customer_id
 WHERE a.account_id = 6;
 ```
-<img src="./outputs/O24.png" width="1000" />
+<img src="./outputs/o24.png" width="1000" />
 
 - 8. Write a SQL query to Identify customers who have more than one account.
 ```sql
@@ -290,7 +290,7 @@ GROUP BY customer_id HAVING COUNT(*) > 1);
 SELECT account_id, SUM(CASE WHEN transaction_type = 'deposit' THEN amount ELSE -amount END) AS transaction_difference
 FROM Transactions GROUP BY account_id;
 ```
-<img src="./outputs/O25.png" width="350" />
+<img src="./outputs/o25.png" width="350" />
 
 - 10. Write a SQL query to Calculate the average daily balance for each account over a specified 
 period.
@@ -307,21 +307,21 @@ FROM (
     ) AS daily_balances
 GROUP BY account_id;
 ```
-<img src="./outputs/O26.png" width="250" />
+<img src="./outputs/o26.png" width="250" />
 
 - 11. Calculate the total balance for each account type.
 ```sql
 SELECT account_type, SUM(balance) AS total_balance
 FROM Accounts GROUP BY account_type;
 ```
-<img src="./outputs/O27.png" width="300" />
+<img src="./outputs/o27.png" width="300" />
 
 - 12. Identify accounts with the highest number of transactions order by descending order. 
 ```sql
 SELECT account_id, COUNT(*) AS transaction_count
 FROM Transactions GROUP BY account_id ORDER BY transaction_count DESC;
 ```
-<img src="./outputs/O28.png" width="250" />
+<img src="./outputs/o28.png" width="250" />
 
 - 13. List customers with high aggregate account balances, along with their account types.
 ```sql
@@ -329,7 +329,7 @@ SELECT * FROM Accounts a INNER JOIN (SELECT c.customer_id,
 SUM(a.balance) AS aggregate_balance FROM Customers c INNER JOIN Accounts a
 ON c.customer_id = a.customer_id GROUP BY c.customer_id) s ON a.customer_id = s.customer_id;
 ```
-<img src="./outputs/O29.png" width="700" />
+<img src="./outputs/o29.png" width="700" />
 
 - 14. Identify and list duplicate transactions based on transaction amount, date, and account. 
 ```sql
