@@ -235,7 +235,7 @@ WHERE account_type = 'savings';
 ```sql
 SELECT AVG(balance) AS Average FROM Accounts;
 ```
- <img src="./outputs/o18.png" width="100" />
+ <img src="./outputs/o18.png" width="150" />
 
  - 2. Write a SQL query to Retrieve the top 10 highest account balances.
  ```sql
